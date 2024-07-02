@@ -11,7 +11,7 @@ permissions:
 jobs:
   deploy-infrastructure:
     runs-on: ubuntu-latest
-    environment: production
+    environment: Production
     steps:
 
       # Checkout code
