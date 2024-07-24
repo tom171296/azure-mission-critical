@@ -4,23 +4,33 @@ targetScope='subscription'
 var projectLocation = 'westeurope'
 
 // Creating resource group
-resource rg 'Microsoft.Resources/resourceGroups@2021-01-01' = {
+resource global_rg 'Microsoft.Resources/resourceGroups@2021-01-01' = {
   name: 'global-infrastructure'
   location: projectLocation
 }
 
+resource runtime_rg 'Microsoft.Resources/resourceGroups@2021-01-01' = {
+  name: 'runtime-infrastructure'
+  location: projectLocation
+}
+
+module privateDns 'private-dns.bicep' = {
+  name: 'PrivateDns'
+  scope: global_rg
+}
+
 module network './network.bicep' = {
   name: 'Network'
-  scope: rg
+  scope: runtime_rg
 }
 
 module aks './aks.bicep' = {
   name: 'AKS'
-  scope: rg
+  scope: runtime_rg
   params: {
     apiServerSubnetId: network.outputs.kubernetes_api_subnet_id
     nodePoolSubnetId: network.outputs.node_pool_subnet_id
-    privateDnsId: network.outputs.privateDnsId
+    privateDnsId: privateDns.outputs.privateDnsId
   }
 }
 

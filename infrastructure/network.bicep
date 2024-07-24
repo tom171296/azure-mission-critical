@@ -1,10 +1,5 @@
 targetScope='resourceGroup'
 
-resource privateDns 'Microsoft.Network/privateDnsZones@2020-06-01' = {
-  name: 'csprivatelink.com'
-  location: 'global'
-}
-
 resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' = {
   name: 'cs-vnet'
   location: resourceGroup().location
@@ -35,7 +30,5 @@ resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' = {
   }
 }
 
-output privateDnsId string = privateDns.id
 output kubernetes_api_subnet_id string = vnet.properties.subnets[0].id
 output node_pool_subnet_id string = vnet.properties.subnets[1].id
-
