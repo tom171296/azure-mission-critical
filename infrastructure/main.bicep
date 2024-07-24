@@ -1,0 +1,2 @@
+
+resource frontDoorProfile 'frontdoor'
