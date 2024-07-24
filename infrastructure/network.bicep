@@ -2,7 +2,7 @@ targetScope='resourceGroup'
 
 resource privateDns 'Microsoft.Network/privateDnsZones@2020-06-01' = {
   name: 'csprivatelink.com'
-  location: resourceGroup().location
+  location: 'global'
 }
 
 resource vnet 'Microsoft.Network/virtualNetworks@2024-01-01' = {
