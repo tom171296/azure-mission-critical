@@ -7,6 +7,9 @@ param privateDnsId string
 resource aksCluster 'Microsoft.ContainerService/managedClusters@2024-05-02-preview' = {
   name: 'aksCluster'
   location: resourceGroup().location
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     kubernetesVersion: '1.30.0'
     nodeResourceGroup: 'aksNodeResourceGroup'
