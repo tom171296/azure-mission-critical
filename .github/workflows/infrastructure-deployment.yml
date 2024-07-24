@@ -32,6 +32,7 @@ jobs:
         inlineScript: |
           az config set bicep.use_binary_from_path=False
           az deployment sub create \
+          --location westeurope \
           --template-file ./infrastructure/main.bicep \
 
 #   setup-namespaces:
