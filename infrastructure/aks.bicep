@@ -4,7 +4,7 @@ param nodePoolSubnetId string
 param apiServerSubnetId string
 param privateDnsId string
 
-resource aksCluster 'Microsoft.ContainerService/managedClusters@2022-05-02-preview' = {
+resource aksCluster 'Microsoft.ContainerService/managedClusters@2024-05-02-preview' = {
   name: 'aksCluster'
   location: resourceGroup().location
   properties: {
