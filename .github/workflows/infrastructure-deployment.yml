@@ -1,4 +1,3 @@
-
 name: Infrastructure deployment
 on: [
   workflow_dispatch
@@ -9,9 +8,31 @@ permissions:
     contents: read
 
 jobs:
+  validate-bicep:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout code
+    - uses: actions/checkout@main
+
+      # Install Bicep CLI
+    - name: Install Bicep CLI
+      run: |
+        az bicep install
+
+      # Validate Bicep files
+    - name: Validate Bicep files
+      run: |
+        az bicep build --file ./infrastructure/main.bicep
+
+      # Lint Bicep files
+    - name: Lint Bicep files
+      run: |
+        bicep lint ./infrastructure/main.bicep
+
   deploy-infrastructure:
     runs-on: ubuntu-latest
     environment: Production
+    needs: validate-bicep
     steps:
 
       # Checkout code
