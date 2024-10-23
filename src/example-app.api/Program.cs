@@ -4,13 +4,7 @@ using OpenTelemetry.Trace;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure OpenTelemetry
-builder.Services.AddOpenTelemetryTracing(builder =>
-{
-    builder
-        .AddAspNetCoreInstrumentation()
-        .AddHttpClientInstrumentation()
-        .AddJaegerExporter();
-});
+builder.
 
 var app = builder.Build();
 
