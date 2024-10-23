@@ -24,20 +24,7 @@ module network './network.bicep' = {
   scope: runtime_rg
 }
 
-module aks './aks.bicep' = {
-  name: 'AKS'
+module azureMonitor './azure-monitor.bicep' = {
+  name: 'AzureMonitor'
   scope: runtime_rg
-  params: {
-    apiServerSubnetId: network.outputs.kubernetes_api_subnet_id
-    nodePoolSubnetId: network.outputs.node_pool_subnet_id
-    privateDnsId: privateDns.outputs.privateDnsId
-  }
 }
-
-// module frontDoor './front-door.bicep' = {
-//   name: 'FrontDoor'
-//   scope: rg
-//   params: {
-    
-//   }
-// }
