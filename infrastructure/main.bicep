@@ -34,10 +34,7 @@ module aks './aks.bicep' = {
   }
 }
 
-// module frontDoor './front-door.bicep' = {
-//   name: 'FrontDoor'
-//   scope: rg
-//   params: {
-    
-//   }
-// }
+module azureMonitor './azure-monitor.bicep' = {
+  name: 'AzureMonitor'
+  scope: runtime_rg
+}
