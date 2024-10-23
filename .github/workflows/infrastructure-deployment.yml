@@ -50,8 +50,9 @@ jobs:
     - name: Deploy bicep to Azure
       uses: Azure/cli@v2
       with:
+        azcliversion: 2.63.0
         inlineScript: |
           az config set bicep.use_binary_from_path=False
           az deployment sub create \
           --location westeurope \
-          --template-file ./infrastructure/main.bicep \
+          --template-file ./infrastructure/main.bicep
