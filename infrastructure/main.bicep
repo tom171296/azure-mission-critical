@@ -24,13 +24,23 @@ module network './network.bicep' = {
   scope: runtime_rg
 }
 
-module aks './aks.bicep' = {
-  name: 'AKS'
+module containerApps './container-apps.bicep' = {
+  name: 'ContainerApps'
   scope: runtime_rg
   params: {
-    apiServerSubnetId: network.outputs.kubernetes_api_subnet_id
-    nodePoolSubnetId: network.outputs.node_pool_subnet_id
-    privateDnsId: privateDns.outputs.privateDnsId
+    containerAppName: 'myContainerApp'
+    containerAppEnvironmentName: 'myContainerAppEnvironment'
+    containerAppImage: 'myContainerAppImage'
+    containerAppDnsSuffix: 'myContainerAppDnsSuffix'
+    logAnalyticsWorkspaceId: logAnalytics.outputs.logAnalyticsWorkspaceId
+  }
+}
+
+module logAnalytics './log-analytics.bicep' = {
+  name: 'LogAnalytics'
+  scope: runtime_rg
+  params: {
+    logAnalyticsWorkspaceName: 'myLogAnalyticsWorkspace'
   }
 }
 
